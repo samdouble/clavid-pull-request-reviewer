@@ -1,6 +1,6 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
-const Anthropic = require('@anthropic-ai/sdk');
+import core from '@actions/core';
+import github from '@actions/github';
+import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
   apiKey: core.getInput('anthropic_api_key') || process.env['ANTHROPIC_API_KEY'],
