@@ -1,0 +1,16 @@
+name: Clavid Pull Request Reviewer
+description: A GitHub Action that reviews pull requests
+author: samdouble
+
+inputs:
+  additional_instructions:
+    description: The label to be applied to the pull request.
+    required: false
+
+branding:
+  icon: activity
+  color: green
+
+runs:
+  using: node20
+  main: dist/index.js
