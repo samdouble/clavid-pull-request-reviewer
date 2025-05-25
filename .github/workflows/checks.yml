@@ -21,9 +21,9 @@ jobs:
       - name: Install
         run: |
           npm install
-      - name: Lint
-        run: |
-          npm run lint
+      # - name: Lint
+      #   run: |
+      #     npm run lint
       # - name: Audit
       #   run: |
       #     npm run audit

@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "A GitHub Action that reviews pull requests",
   "main": "index.js",
-  "type": "module",
   "author": "samdouble",
   "license": "ISC",
   "homepage": "https://github.com/samdouble/clavid-pull-request-reviewer#readme",
