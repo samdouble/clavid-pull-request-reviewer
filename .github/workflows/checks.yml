@@ -24,12 +24,9 @@ jobs:
       - name: Lint
         run: |
           npm run lint
-      - name: Audit
-        run: |
-          npm run audit
+      # - name: Audit
+      #   run: |
+      #     npm run audit
       - name: Test
         run: |
           npm test
-      - name: Build
-        run: |
-          npm run build

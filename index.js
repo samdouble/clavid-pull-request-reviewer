@@ -1,26 +1,45 @@
+import axios from 'axios';
 import core from '@actions/core';
 import github from '@actions/github';
 import Anthropic from '@anthropic-ai/sdk';
 
+const anthropicApiKey = core.getInput('anthropic_api_key') || process.env['ANTHROPIC_API_KEY'];
+const githubToken = core.getInput('github_token') || process.env['GITHUB_TOKEN'];
+
 const client = new Anthropic({
-  apiKey: core.getInput('anthropic_api_key') || process.env['ANTHROPIC_API_KEY'],
+  apiKey: anthropicApiKey,
 });
 
 try {
   const additionalInstructions = core.getInput('additional_instructions');
-  console.log(`Additional instructions: ${additionalInstructions}`);
 
-  const message = await client.messages.create({
-    max_tokens: 1024,
-    messages: [{ role: 'user', content: additionalInstructions }],
-    model: 'claude-3-7-sonnet-latest',
+  const payload = JSON.stringify(github.context.payload, undefined, 2);
+  console.log(`The event payload: ${payload}`);
+
+  const instance = axios.create({
+    baseURL: 'https://api.github.com',
+    timeout: 1000,
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${githubToken}`,
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
   });
-  console.log(message.content);
+  const res = await instance.get(payload.pull_request._links.commits.href)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+    .finally(() => console.log('finally'));
+  console.log("Commits: ", res.data);
+
+  // const message = await client.messages.create({
+  //   max_tokens: 1024,
+  //   messages: [{ role: 'user', content: additionalInstructions }],
+  //   model: 'claude-3-7-sonnet-latest',
+  // });
+  // console.log(message.content);
 
   const time = (new Date()).toTimeString();
   core.setOutput("time", time);
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
 } catch (error) {
   core.setFailed(error.message);
 }
