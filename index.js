@@ -4,7 +4,13 @@ import github from '@actions/github';
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropicApiKey = core.getInput('anthropic_api_key') || process.env['ANTHROPIC_API_KEY'];
+if (!anthropicApiKey) {
+  core.setFailed('Anthropic API key must be set, through the anthropic_api_key input or ANTHROPIC_API_KEY environment variable');
+}
 const githubToken = core.getInput('github_token') || process.env['GITHUB_TOKEN'];
+if (!githubToken) {
+  core.setFailed('GitHub token must be set, through the github_token input or GITHUB_TOKEN environment variable');
+}
 
 const client = new Anthropic({
   apiKey: anthropicApiKey,

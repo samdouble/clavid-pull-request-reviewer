@@ -5,9 +5,12 @@ author: samdouble
 inputs:
   anthropic_api_key:
     description: An Anthropic API key
-    required: true
+    required: false
   additional_instructions:
     description: Additional instructions for the review
+    required: false
+  github_token:
+    description: A GitHub token
     required: false
 
 branding:
