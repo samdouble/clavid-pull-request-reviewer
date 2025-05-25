@@ -1,0 +1,32 @@
+{
+  "name": "clavid-pull-request-reviewer",
+  "version": "0.1.0",
+  "description": "A GitHub Action that reviews pull requests",
+  "main": "index.js",
+  "author": "samdouble",
+  "license": "ISC",
+  "homepage": "https://github.com/samdouble/clavid-pull-request-reviewer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samdouble/clavid-pull-request-reviewer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/samdouble/clavid-pull-request-reviewer/issues"
+  },
+  "scripts": {
+    "audit": "npm-audit",
+    "lint": "eslint --ext .js ./",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1",
+    "@anthropic-ai/sdk": "^0.52.0",
+    "axios": "^1.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.27.0",
+    "jest": "^29.7.0",
+    "npm-audit-pipeline": "^0.6.1"
+  }
+}
